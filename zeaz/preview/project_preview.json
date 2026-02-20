@@ -1,0 +1,119 @@
+{
+  "project": "ZEA Z Enterprise API",
+  "preview": {
+    "automation_jobs": [
+      {
+        "id": "job_1",
+        "type": "tiktok_feed_form",
+        "status": "generated",
+        "payload": {
+          "product_id": "demo-sku-001",
+          "title": "ZEA Z Smart Bottle",
+          "price": 29.99,
+          "currency": "USD",
+          "highlights": [
+            "24h cold",
+            "Leak-proof",
+            "Eco-friendly"
+          ],
+          "description": "ZEA Z Smart Bottle | 24h cold, Leak-proof, Eco-friendly"
+        },
+        "created_at": "2026-02-20T23:18:52.748056+00:00",
+        "updated_at": "2026-02-20T23:18:52.748071+00:00"
+      },
+      {
+        "id": "job_2",
+        "type": "tiktok_video",
+        "status": "rendering",
+        "payload": {
+          "product_id": "demo-sku-001",
+          "script_style": "conversion",
+          "duration_seconds": 20,
+          "storyboard": [
+            "Hook: show product in first 3 seconds",
+            "Benefit: highlight top feature",
+            "CTA: check TikTok Shop link"
+          ]
+        },
+        "created_at": "2026-02-20T23:18:52.748075+00:00",
+        "updated_at": "2026-02-20T23:18:52.748077+00:00"
+      },
+      {
+        "id": "job_3",
+        "type": "tiktok_upload",
+        "status": "uploaded",
+        "payload": {
+          "job_reference": "job_2",
+          "shop_id": "demo-shop-01",
+          "creator_handle": "@zeaz_creator",
+          "platform": "tiktok_shop_affiliate"
+        },
+        "created_at": "2026-02-20T23:18:52.748080+00:00",
+        "updated_at": "2026-02-20T23:18:52.748082+00:00"
+      }
+    ],
+    "latest_jobs": [
+      {
+        "id": "job_3",
+        "type": "tiktok_upload",
+        "status": "uploaded",
+        "payload": {
+          "job_reference": "job_2",
+          "shop_id": "demo-shop-01",
+          "creator_handle": "@zeaz_creator",
+          "platform": "tiktok_shop_affiliate"
+        },
+        "created_at": "2026-02-20T23:18:52.748080+00:00",
+        "updated_at": "2026-02-20T23:18:52.748082+00:00"
+      },
+      {
+        "id": "job_2",
+        "type": "tiktok_video",
+        "status": "rendering",
+        "payload": {
+          "product_id": "demo-sku-001",
+          "script_style": "conversion",
+          "duration_seconds": 20,
+          "storyboard": [
+            "Hook: show product in first 3 seconds",
+            "Benefit: highlight top feature",
+            "CTA: check TikTok Shop link"
+          ]
+        },
+        "created_at": "2026-02-20T23:18:52.748075+00:00",
+        "updated_at": "2026-02-20T23:18:52.748077+00:00"
+      },
+      {
+        "id": "job_1",
+        "type": "tiktok_feed_form",
+        "status": "generated",
+        "payload": {
+          "product_id": "demo-sku-001",
+          "title": "ZEA Z Smart Bottle",
+          "price": 29.99,
+          "currency": "USD",
+          "highlights": [
+            "24h cold",
+            "Leak-proof",
+            "Eco-friendly"
+          ],
+          "description": "ZEA Z Smart Bottle | 24h cold, Leak-proof, Eco-friendly"
+        },
+        "created_at": "2026-02-20T23:18:52.748056+00:00",
+        "updated_at": "2026-02-20T23:18:52.748071+00:00"
+      }
+    ],
+    "api_endpoints": [
+      "POST /auth/token",
+      "GET /wallet/balance/{user_id}/{currency}",
+      "POST /wallet/credit",
+      "POST /wallet/debit",
+      "POST /tiktok/feed-product-form/generate",
+      "POST /tiktok/video/generate",
+      "POST /tiktok/shop-affiliate/upload",
+      "GET /tiktok/jobs",
+      "GET /admin/control-panel",
+      "GET /user/control-panel"
+    ]
+  }
+}

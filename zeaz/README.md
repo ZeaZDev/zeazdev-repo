@@ -34,3 +34,16 @@ The React-Admin app now includes:
 - Generate Product Video
 - Upload TikTok Shop Aff
 - TikTok Jobs list
+
+
+## Generate a local project preview
+
+Run the preview generator to produce a demo JSON snapshot of automation flows and API surfaces:
+
+```bash
+cd zeaz
+python preview_project.py
+```
+
+Output file:
+- `preview/project_preview.json`
