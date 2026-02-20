@@ -15,3 +15,35 @@ This scaffold was generated from `PROJECT_BLUEPRINT.md` and mirrors the document
 cd zeaz
 ./install.sh
 ```
+
+
+## New automation APIs
+
+- `POST /tiktok/feed-product-form/generate` — automated feed product form generation for TikTok Shop showcase.
+- `POST /tiktok/video/generate` — automated product video generation job creation.
+- `POST /tiktok/shop-affiliate/upload` — automated TikTok Shop affiliate upload job creation.
+- `GET /tiktok/jobs` and `GET /tiktok/jobs/{job_id}` — inspect generated automation jobs.
+- `GET /admin/control-panel` and `GET /user/control-panel` — admin/user control panel API data.
+
+## Admin UI additions
+
+The React-Admin app now includes:
+- Admin Control Panel
+- User Control Panel
+- Generate Feed Product Form
+- Generate Product Video
+- Upload TikTok Shop Aff
+- TikTok Jobs list
+
+
+## Generate a local project preview
+
+Run the preview generator to produce a demo JSON snapshot of automation flows and API surfaces:
+
+```bash
+cd zeaz
+python preview_project.py
+```
+
+Output file:
+- `preview/project_preview.json`
