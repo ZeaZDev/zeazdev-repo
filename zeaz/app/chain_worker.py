@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 import time
+from typing import Iterable
 
 from .ledger import LedgerEntryInput, append_entry
 
@@ -20,6 +21,17 @@ def process_confirmed_tx(tx_hash: str, user_id: str, amount: int, currency: str)
             entry_type="onchain",
         )
     )
+
+
+def process_candidates(candidates: Iterable[dict], latest_block: int) -> int:
+    """Process candidate on-chain deposits and return how many were finalized."""
+    finalized = 0
+    for tx in candidates:
+        tx_block = int(tx["block_number"])
+        if latest_block - tx_block >= CONFIRM_DEPTH:
+            if process_confirmed_tx(tx["tx_hash"], tx["user_id"], int(tx["amount"]), tx["currency"]):
+                finalized += 1
+    return finalized
 
 
 def run() -> None:
