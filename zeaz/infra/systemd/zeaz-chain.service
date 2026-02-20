@@ -1,0 +1,15 @@
+[Unit]
+Description=ZEA Z Chain Worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/zeaz
+EnvironmentFile=/opt/zeaz/profiles/prod.env
+ExecStart=/opt/zeaz/.venv/bin/python -m app.chain_worker
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
