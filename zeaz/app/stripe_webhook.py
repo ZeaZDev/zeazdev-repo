@@ -11,11 +11,23 @@ from .ledger import LedgerEntryInput, append_entry
 STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET", "whsec-change-me")
 
 
+def _extract_v1(signature: str) -> str:
+    if "=" not in signature:
+        return signature
+    parts = [p.strip() for p in signature.split(",")]
+    for part in parts:
+        if part.startswith("v1="):
+            return part.removeprefix("v1=")
+    return ""
+
+
 def verify_signature(payload: bytes, signature: str | None) -> None:
     if not signature:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing Stripe signature")
+
     expected = hmac.new(STRIPE_WEBHOOK_SECRET.encode(), payload, sha256).hexdigest()
-    if not hmac.compare_digest(expected, signature):
+    provided = _extract_v1(signature)
+    if not provided or not hmac.compare_digest(expected, provided):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid Stripe signature")
 
 

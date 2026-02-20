@@ -7,6 +7,7 @@ from sqlalchemy import (
     BigInteger,
     Column,
     DateTime,
+    Identity,
     MetaData,
     String,
     Table,
@@ -20,7 +21,7 @@ metadata = MetaData()
 ledger = Table(
     "ledger",
     metadata,
-    Column("id", BigInteger, primary_key=True),
+    Column("id", BigInteger, Identity(always=False), primary_key=True),
     Column("user_id", String(128), nullable=False, index=True),
     Column("amount", BigInteger, nullable=False),
     Column("currency", String(16), nullable=False),
@@ -33,7 +34,7 @@ ledger = Table(
 audit_log = Table(
     "audit_log",
     metadata,
-    Column("id", BigInteger, primary_key=True),
+    Column("id", BigInteger, Identity(always=False), primary_key=True),
     Column("actor", String(128), nullable=False),
     Column("action", String(128), nullable=False),
     Column("details", Text, nullable=False),
