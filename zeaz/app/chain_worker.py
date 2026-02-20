@@ -27,9 +27,20 @@ def process_candidates(candidates: Iterable[dict], latest_block: int) -> int:
     """Process candidate on-chain deposits and return how many were finalized."""
     finalized = 0
     for tx in candidates:
-        tx_block = int(tx["block_number"])
+        try:
+            tx_block = int(tx["block_number"])
+            tx_hash = str(tx["tx_hash"]).strip()
+            user_id = str(tx["user_id"]).strip()
+            amount = int(tx["amount"])
+            currency = str(tx["currency"]).strip().upper()
+        except (KeyError, TypeError, ValueError):
+            continue
+
+        if not tx_hash or not user_id or amount <= 0:
+            continue
+
         if latest_block - tx_block >= CONFIRM_DEPTH:
-            if process_confirmed_tx(tx["tx_hash"], tx["user_id"], int(tx["amount"]), tx["currency"]):
+            if process_confirmed_tx(tx_hash, user_id, amount, currency):
                 finalized += 1
     return finalized
 

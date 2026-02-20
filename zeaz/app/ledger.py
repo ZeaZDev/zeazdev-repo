@@ -61,11 +61,12 @@ def append_entry(entry: LedgerEntryInput) -> bool:
 
 
 def user_balance(user_id: str, currency: str) -> int:
+    normalized_currency = _normalize_currency(currency)
     with db_connection() as conn:
         total = conn.execute(
             select(func.coalesce(func.sum(ledger.c.amount), 0)).where(
                 ledger.c.user_id == user_id,
-                ledger.c.currency == currency,
+                ledger.c.currency == normalized_currency,
             )
         ).scalar_one()
     return int(total)

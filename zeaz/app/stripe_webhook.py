@@ -32,11 +32,14 @@ def verify_signature(payload: bytes, signature: str | None) -> None:
 
 
 def process_payment_intent_succeeded(event: dict) -> bool:
-    data = event["data"]["object"]
-    amount = int(data["amount_received"])
-    currency = str(data["currency"]).upper()
-    stripe_id = str(data["id"])
-    user_id = str(data.get("metadata", {}).get("user_id", "unknown"))
+    data = event.get("data", {}).get("object", {})
+    stripe_id = str(data.get("id", "")).strip()
+    currency = str(data.get("currency", "")).strip().upper()
+    amount = int(data.get("amount_received", 0))
+    user_id = str(data.get("metadata", {}).get("user_id", "unknown")).strip()
+
+    if not stripe_id or not currency or amount <= 0:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid payment_intent payload")
 
     return append_entry(
         LedgerEntryInput(
